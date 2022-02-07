@@ -74,9 +74,8 @@ const customFetch = (url, headers) =>
 
 const api = new Api({
   baseUrl: 'https://api.menashekoren.students.nomoreparties.sbs',
-  // baseUrl: 'http://localhost:3000/',
   headers: {
-    authorization: 'Bearer ${token}',
+    authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   },
 });

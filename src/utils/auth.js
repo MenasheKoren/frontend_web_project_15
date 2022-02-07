@@ -1,7 +1,6 @@
 import checkResponse from './checkResponse';
 
 const BASE_URL = 'https://api.menashekoren.students.nomoreparties.sbs';
-// const BASE_URL = 'http://localhost:3000/';
 
 export const token = localStorage.getItem('token');
 
