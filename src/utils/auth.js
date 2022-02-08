@@ -1,6 +1,9 @@
 import checkResponse from './checkResponse';
 
-const BASE_URL = 'https://api.menashekoren.students.nomoreparties.sbs';
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.menashekoren.students.nomoreparties.sbs'
+    : 'http://localhost:3001';
 
 export const token = localStorage.getItem('token');
 

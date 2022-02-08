@@ -1,6 +1,9 @@
 import { token } from './auth';
 
-
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.menashekoren.students.nomoreparties.sbs'
+    : 'http://localhost:3001';
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -28,6 +31,7 @@ class Api {
   }
 
   editAvatar(data) {
+    console.log(this._headers);
     return customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: 'PATCH',
@@ -73,7 +77,7 @@ const customFetch = (url, headers) =>
   );
 
 const api = new Api({
-  baseUrl: 'https://api.menashekoren.students.nomoreparties.sbs',
+  baseUrl: BASE_URL,
   headers: {
     authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',

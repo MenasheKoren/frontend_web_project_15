@@ -34,7 +34,6 @@ function App() {
   const [password, setPassword] = useState('');
   const [isRegistered, setIsRegistered] = useState(false);
   const localEmail = localStorage.getItem('localEmail');
-  // const localPassword = localStorage.getItem('localPassword');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,7 +41,8 @@ function App() {
     api
       .getUserInfo()
       .then((userData) => {
-        setCurrentUser(userData);
+        setCurrentUser(userData.user);
+        console.log(userData.user);
       })
       .catch((err) => console.log(`Error.....: ${err}`));
   }, []);
@@ -153,7 +153,7 @@ function App() {
   }
 
   function handleCloseSuccessPopup() {
-    navigate('/signin');
+    navigate('signin');
     closeAllPopups();
   }
 
