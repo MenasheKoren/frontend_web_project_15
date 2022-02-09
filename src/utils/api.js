@@ -4,6 +4,7 @@ const BASE_URL =
   process.env.NODE_ENV === 'production'
     ? 'https://api.menashekoren.students.nomoreparties.sbs'
     : 'http://localhost:3001';
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -11,7 +12,7 @@ class Api {
   }
 
   getInitialCards() {
-    return customFetch(`${this._baseUrl}/cards`, {
+    return customFetch(`${this._baseUrl}/cards/api`, {
       headers: this._headers,
     });
   }
@@ -31,7 +32,6 @@ class Api {
   }
 
   editAvatar(data) {
-    console.log(this._headers);
     return customFetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: 'PATCH',
@@ -42,7 +42,7 @@ class Api {
   }
 
   createCard(data) {
-    return customFetch(`${this._baseUrl}/cards`, {
+    return customFetch(`${this._baseUrl}/cards/api`, {
       headers: this._headers,
       method: 'POST',
       body: JSON.stringify(data),
@@ -50,21 +50,21 @@ class Api {
   }
 
   deleteCard(cardId) {
-    return customFetch(`${this._baseUrl}/cards/${cardId}`, {
+    return customFetch(`${this._baseUrl}/cards/api/${cardId}`, {
       headers: this._headers,
       method: 'DELETE',
     });
   }
 
   addLikes(cardId) {
-    return customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return customFetch(`${this._baseUrl}/cards/api/${cardId}/likes`, {
       headers: this._headers,
       method: 'PUT',
     });
   }
 
   removeLikes(cardId) {
-    return customFetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return customFetch(`${this._baseUrl}/cards/api/${cardId}/likes`, {
       headers: this._headers,
       method: 'DELETE',
     });

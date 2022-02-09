@@ -19,7 +19,7 @@ export const InfoToolTip = ({
       ].join(' ')}
     >
       <div className="popup__container popup__container_type_info-tool-tip">
-        {location.pathname === '/signup' && isRegistered && (
+        {isRegistered && (
           <>
             <button
               className="popup__close button button_hover_dark"
