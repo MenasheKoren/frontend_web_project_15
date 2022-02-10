@@ -141,7 +141,7 @@ function App() {
     auth
       .register(email, password)
       .then((result) => {
-        if (result.data && result.data._id) {
+        if (result && result._id) {
           handleSetRegistration();
         }
       })
@@ -152,7 +152,7 @@ function App() {
   }
 
   function handleCloseSuccessPopup() {
-    navigate('signin');
+    navigate('/signin', {replace: true});
     closeAllPopups();
   }
 

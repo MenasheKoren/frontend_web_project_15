@@ -1,8 +1,8 @@
-import React from 'react';
+import React                 from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../images/logo.svg';
+import logo                  from '../images/logo.svg';
 
-export default function Header({ handleLogout, isRegistered, localEmail }) {
+export default function Header({ handleLogout, localEmail }) {
   const location = useLocation();
 
   return (
@@ -23,12 +23,12 @@ export default function Header({ handleLogout, isRegistered, localEmail }) {
             Log out
           </Link>
         )}
-        {location.pathname === '/signin' && !isRegistered && (
+        {location.pathname === '/signin' && (
           <Link className="link link__hover" to="signup">
             Sign up
           </Link>
         )}
-        {location.pathname === '/signup' && !isRegistered && (
+        {location.pathname === '/signup' && (
           <Link className="link link__hover" to="signin">
             Log in
           </Link>
