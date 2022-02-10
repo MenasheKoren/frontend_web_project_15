@@ -1,21 +1,21 @@
-import React from 'react';
+import React                  from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Card(props) {
+function Card({ card, onCardClick, onCardDelete, onCardLike }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = props.card.owner === currentUser._id;
-  const isLiked = props.card.likes && props.card.likes.some((i) => i === currentUser._id);
+  const isOwn = card.owner === currentUser._id;
+  const isLiked = card.likes && card.likes.some((i) => i === currentUser._id);
 
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
 
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    onCardLike(card);
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    onCardDelete(card);
   }
 
   return (
@@ -28,12 +28,12 @@ function Card(props) {
       )}
       <img
         className="card__image"
-        src={props.card.link}
-        alt={props.card.name}
+        src={card.link}
+        alt={card.name}
         onClick={handleClick}
       />
       <div className="card__caption">
-        <h3 className="card__location ellipses">{props.card.name}</h3>
+        <h3 className="card__location ellipses">{card.name}</h3>
         <div className="likes-container">
           <button
             className={[
@@ -44,7 +44,9 @@ function Card(props) {
             onClick={handleLikeClick}
           />
 
-          <span className="card__likes-count">{props.card.likes ? props.card.likes.length : 0}</span>
+          <span className="card__likes-count">
+            {card.likes ? card.likes.length : 0}
+          </span>
         </div>
       </div>
     </li>

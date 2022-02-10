@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState }              from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { CurrentUserContext }                      from '../contexts/CurrentUserContext';
 import '../index.css';
-import api from '../utils/api';
-import * as auth from '../utils/auth';
-import { token } from '../utils/auth';
-import { AddPlacePopup } from './AddPlacePopup';
-import { EditAvatarPopup } from './EditAvatarPopup';
+import api                                         from '../utils/api';
+import * as auth                                   from '../utils/auth';
+import { token }                                   from '../utils/auth';
+import { AddPlacePopup }                           from './AddPlacePopup';
+import { EditAvatarPopup }                         from './EditAvatarPopup';
 
 import { EditProfilePopup } from './EditProfilePopup';
-import ImagePopup from './ImagePopup';
-import { InfoToolTip } from './InfoToolTip';
-import Layout from './Layout';
-import Login from './Login';
+import ImagePopup           from './ImagePopup';
+import { InfoToolTip }      from './InfoToolTip';
+import Layout               from './Layout';
+import Login                from './Login';
 
-import Main from './Main';
-import PopupWithForm from './PopupWithForm';
+import Main               from './Main';
+import PopupWithForm      from './PopupWithForm';
 import { ProtectedRoute } from './ProtectedRoute';
-import Register from './Register';
+import Register           from './Register';
 
 function App() {
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
@@ -43,7 +43,7 @@ function App() {
       .then((userData) => {
         setCurrentUser(userData.user);
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }, []);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function App() {
       .then((cardData) => {
         setCardList([...cardData]);
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }, []);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ function App() {
           setIsRegistered(true);
           navigate('/', { replace: true });
         })
-        .catch((err) => console.log(`Error.....: ${err}`));
+        .catch((err) => console.log(`Error..... ${err}`));
     }
   }, []);
 
@@ -88,7 +88,7 @@ function App() {
     return new Promise((res) => {
       setIsRegistered(true);
       res();
-    }).catch((err) => console.log(`Error.....: ${err}`));
+    }).catch((err) => console.log(`Error..... ${err}`));
   }
 
   function handleLogout() {
@@ -103,7 +103,7 @@ function App() {
       .then(() => {
         navigate('/signin', { replace: true });
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }
 
   function handleInputEmail(e) {
@@ -132,7 +132,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(`Error.....: ${err}`);
+        console.log(`Error..... ${err}`);
       });
   }
 
@@ -146,7 +146,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(`Error.....: ${err}`);
+        console.log(`Error..... ${err}`);
       })
       .finally(handleSubmitInfoToolTip);
   }
@@ -159,15 +159,18 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes && card.likes.some((i) => i === currentUser._id);
     if (!isLiked) {
+      console.log('adding like');
       api
         .addLikes(card._id, !isLiked)
         .then((newCard) => {
+          console.log(newCard);
           setCardList((state) =>
             state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
-        .catch((err) => console.log(`Error.....: ${err}`));
+        .catch((err) => console.log(`Error..... ${err}`));
     } else {
+      console.log('removing like');
       api
         .removeLikes(card._id, isLiked)
         .then((newCard) => {
@@ -176,7 +179,7 @@ function App() {
             state.map((c) => (c._id === card._id ? newCard : c))
           );
         })
-        .catch((err) => console.log(`Error.....: ${err}`));
+        .catch((err) => console.log(`Error..... ${err}`));
     }
   }
 
@@ -187,7 +190,7 @@ function App() {
         const deletedCardID = card._id;
         setCardList(cardList.filter((card) => card._id !== deletedCardID));
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }
 
   function handleCardClick({ link, name }) {
@@ -208,7 +211,7 @@ function App() {
       .then(() => {
         closeAllPopups();
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }
 
   function handleAddPlaceSubmit(data) {
@@ -221,7 +224,7 @@ function App() {
       .then(() => {
         closeAllPopups();
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }
 
   function handleUpdateAvatar(data) {
@@ -234,7 +237,7 @@ function App() {
       .then(() => {
         closeAllPopups();
       })
-      .catch((err) => console.log(`Error.....: ${err}`));
+      .catch((err) => console.log(`Error..... ${err}`));
   }
 
   function handleSetRegistration() {
