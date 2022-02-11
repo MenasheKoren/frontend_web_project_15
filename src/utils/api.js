@@ -64,7 +64,6 @@ class Api {
   }
 
   removeLikes(cardId) {
-    
     return customFetch(`${this._baseUrl}/cards/api/${cardId}/likes`, {
       headers: this._headers,
       method: 'DELETE',

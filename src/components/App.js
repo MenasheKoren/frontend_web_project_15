@@ -59,7 +59,7 @@ function App() {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
         if (location.pathname === '/signup' && isRegistered) {
-          navigate('/signin', { replace: true });
+          navigate('signin', { replace: true });
           closeAllPopups();
         }
         closeAllPopups();
@@ -152,31 +152,27 @@ function App() {
   }
 
   function handleCloseSuccessPopup() {
-    navigate('/signin', {replace: true});
+    navigate('/signin', { replace: true });
     closeAllPopups();
   }
 
   function handleCardLike(card) {
     const isLiked = card.likes && card.likes.some((i) => i === currentUser._id);
     if (!isLiked) {
-      console.log('adding like');
       api
         .addLikes(card._id, !isLiked)
         .then((newCard) => {
-          console.log(newCard);
           setCardList((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
+            state.map((c) => (c._id === card._id ? newCard.card : c))
           );
         })
         .catch((err) => console.log(`Error..... ${err}`));
     } else {
-      console.log('removing like');
       api
         .removeLikes(card._id, isLiked)
         .then((newCard) => {
-          console.log(newCard);
           setCardList((state) =>
-            state.map((c) => (c._id === card._id ? newCard : c))
+            state.map((c) => (c._id === card._id ? newCard.card : c))
           );
         })
         .catch((err) => console.log(`Error..... ${err}`));

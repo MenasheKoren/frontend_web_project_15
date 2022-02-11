@@ -1,7 +1,7 @@
-import React from 'react';
+import React           from 'react';
 import { useLocation } from 'react-router-dom';
-import fail from '../images/fail.png';
-import success from '../images/success.png';
+import fail            from '../images/fail.png';
+import success         from '../images/success.png';
 
 export const InfoToolTip = ({
   closeAllPopups,
@@ -19,7 +19,7 @@ export const InfoToolTip = ({
       ].join(' ')}
     >
       <div className="popup__container popup__container_type_info-tool-tip">
-        {isRegistered && (
+        {location.pathname === '/signup' && isRegistered && (
           <>
             <button
               className="popup__close button button_hover_dark"
