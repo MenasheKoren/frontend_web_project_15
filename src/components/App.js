@@ -201,9 +201,6 @@ function App() {
     const { name, description } = data;
     api
       .editUserInfo({ name, about: description })
-      .then((name, description) => {
-        setCurrentUser(name, description);
-      })
       .then(() => {
         closeAllPopups();
       })
@@ -227,9 +224,6 @@ function App() {
     const avatar = data.avatar.valueOf();
     api
       .editAvatar(avatar)
-      .then((avatar) => {
-        setCurrentUser(avatar);
-      })
       .then(() => {
         closeAllPopups();
       })
@@ -243,6 +237,7 @@ function App() {
   function handleSubmitInfoToolTip() {
     setIsInfoToolTipPopupOpen(true);
   }
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
