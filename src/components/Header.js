@@ -1,6 +1,6 @@
-import React                 from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo                  from '../images/logo.svg';
+import logo from '../images/logo.svg';
 
 export default function Header({ handleLogout, localEmail }) {
   const location = useLocation();

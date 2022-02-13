@@ -1,23 +1,23 @@
-import React, { useEffect, useState }              from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { CurrentUserContext }                      from '../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import '../index.css';
-import api                                         from '../utils/api';
-import * as auth                                   from '../utils/auth';
-import { token }                                   from '../utils/auth';
-import { AddPlacePopup }                           from './AddPlacePopup';
-import { EditAvatarPopup }                         from './EditAvatarPopup';
+import api from '../utils/api';
+import * as auth from '../utils/auth';
+import { token } from '../utils/auth';
+import { AddPlacePopup } from './AddPlacePopup';
+import { EditAvatarPopup } from './EditAvatarPopup';
 
 import { EditProfilePopup } from './EditProfilePopup';
-import ImagePopup           from './ImagePopup';
-import { InfoToolTip }      from './InfoToolTip';
-import Layout               from './Layout';
-import Login                from './Login';
+import ImagePopup from './ImagePopup';
+import { InfoToolTip } from './InfoToolTip';
+import Layout from './Layout';
+import Login from './Login';
 
-import Main               from './Main';
-import PopupWithForm      from './PopupWithForm';
+import Main from './Main';
+import PopupWithForm from './PopupWithForm';
 import { ProtectedRoute } from './ProtectedRoute';
-import Register           from './Register';
+import Register from './Register';
 
 function App() {
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
@@ -58,7 +58,7 @@ function App() {
   useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
-        if (location.pathname === 'signup' && isRegistered) {
+        if (location.pathname === '/signup' && isRegistered) {
           navigate('/signin', { replace: true });
           closeAllPopups();
         }
