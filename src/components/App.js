@@ -58,8 +58,8 @@ function App() {
   useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
-        if (location.pathname === '/signup' && isRegistered) {
-          navigate('signin', { replace: true });
+        if (location.pathname === 'signup' && isRegistered) {
+          navigate('/signin', { replace: true });
           closeAllPopups();
         }
         closeAllPopups();
@@ -212,7 +212,8 @@ function App() {
     api
       .createCard({ name: title, link })
       .then((newCard) => {
-        setCardList([newCard, ...cardList]);
+        const { card } = newCard;
+        setCardList([card, ...cardList]);
       })
       .then(() => {
         closeAllPopups();
