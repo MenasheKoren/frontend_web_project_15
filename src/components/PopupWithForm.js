@@ -28,7 +28,6 @@ const PopupWithForm = ({
           <button
             className="popup__save button button_hover_darker"
             type="submit"
-            // disabled
           >
             {buttonText}
           </button>

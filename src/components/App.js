@@ -38,21 +38,16 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userData) => {
-        setCurrentUser(userData.user);
-      })
-      .catch((err) => console.log(`Error..... ${err}`));
-  }, []);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cardData) => {
-        setCardList([...cardData]);
-      })
-      .catch((err) => console.log(`Error..... ${err}`));
+    if (token) {
+      localStorage.getItem(token);
+      auth
+        .getContent(token)
+        .then(() => {
+          setIsRegistered(true);
+          navigate('/', { replace: true });
+        })
+        .catch((err) => console.log(`Error..... ${err}`));
+    }
   }, []);
 
   useEffect(() => {
@@ -71,18 +66,23 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape);
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      localStorage.getItem(token);
-      auth
-        .getContent(token)
-        .then(() => {
-          setIsRegistered(true);
-          navigate('/', { replace: true });
-        })
-        .catch((err) => console.log(`Error..... ${err}`));
-    }
-  }, []);
+  function getUserInfoEffect() {
+    api
+      .getUserInfo()
+      .then((userData) => {
+        setCurrentUser(userData.user);
+      })
+      .catch((err) => console.log(`Error..... ${err}`));
+  }
+
+  function getInitialCardsEffect() {
+    api
+      .getInitialCards()
+      .then((cardData) => {
+        setCardList([...cardData]);
+      })
+      .catch((err) => console.log(`Error..... ${err}`));
+  }
 
   function handleLogin() {
     return new Promise((res) => {
@@ -127,7 +127,7 @@ function App() {
         if (data.token) {
           localStorage.setItem('localEmail', email);
           handleLogin().then(() => {
-            navigate('/');
+            navigate('/', { replace: true });
           });
         }
       })
@@ -291,6 +291,8 @@ function App() {
                   cardList={cardList}
                   handleCardLike={handleCardLike}
                   handleDeleteCard={handleDeleteCard}
+                  getUserInfoEffect={getUserInfoEffect}
+                  getInitialCardsEffect={getInitialCardsEffect}
                 />
                 <EditAvatarPopup
                   isOpen={isEditAvatarPopupOpen}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import edit from '../images/edit.svg';
 import Card from './Card';
@@ -11,8 +11,12 @@ function Main({
   onAddPlaceClick,
   onEditAvatarClick,
   onEditProfileClick,
+  getUserInfoEffect,
+  getInitialCardsEffect,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
+  useEffect(getUserInfoEffect, []);
+  useEffect(getInitialCardsEffect, []);
 
   return (
     <main className="main">
